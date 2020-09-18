@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Vellar_Vulnarable_1.js"></script>
+        <script src="data/River_2.js"></script>
+        <script src="data/Sand_Deposition_3.js"></script>
+        <script src="data/Existing_pond_4.js"></script>
+        <script src="data/Vulnarable_Village_5.js"></script>
+        <script src="data/Ending_Point_6.js"></script>
+        <script src="data/Starting_Point_7.js"></script>
+        <script src="data/Existing_Stream_8.js"></script>
+        <script src="data/Stream_Link_Required_9.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[11.3708198161238,79.48514132199264],[11.533045267252145,79.80290312574353]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_Google_Hybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 28
+        });
+        layer_Google_Hybrid_0;
+        map.addLayer(layer_Google_Hybrid_0);
+        function pop_Vellar_Vulnarable_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">LOCATION</th>\
+                        <td>' + (feature.properties['LOCATION'] !== null ? Autolinker.link(feature.properties['LOCATION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vulnerable</th>\
+                        <td>' + (feature.properties['Vulnerable'] !== null ? Autolinker.link(feature.properties['Vulnerable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Class</th>\
+                        <td>' + (feature.properties['Class'] !== null ? Autolinker.link(feature.properties['Class'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Vellar_Vulnarable_1_0(feature) {
+            switch(String(feature.properties['Vulnerable'])) {
+                case '1':
+                    return {
+                pane: 'pane_Vellar_Vulnarable_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(32,205,239,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Vellar_Vulnarable_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,243,75,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Vellar_Vulnarable_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,69,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Vellar_Vulnarable_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(176,40,200,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Vellar_Vulnarable_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,20,26,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Vellar_Vulnarable_1');
+        map.getPane('pane_Vellar_Vulnarable_1').style.zIndex = 401;
+        map.getPane('pane_Vellar_Vulnarable_1').style['mix-blend-mode'] = 'normal';
+        var layer_Vellar_Vulnarable_1 = new L.geoJson(json_Vellar_Vulnarable_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Vellar_Vulnarable_1',
+            layerName: 'layer_Vellar_Vulnarable_1',
+            pane: 'pane_Vellar_Vulnarable_1',
+            onEachFeature: pop_Vellar_Vulnarable_1,
+            style: style_Vellar_Vulnarable_1_0,
+        });
+        bounds_group.addLayer(layer_Vellar_Vulnarable_1);
+        map.addLayer(layer_Vellar_Vulnarable_1);
+        function pop_River_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Layer_1</th>\
+                        <td>' + (feature.properties['Layer_1'] !== null ? Autolinker.link(feature.properties['Layer_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_River_2_0() {
+            return {
+                pane: 'pane_River_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(84,65,255,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_River_2');
+        map.getPane('pane_River_2').style.zIndex = 402;
+        map.getPane('pane_River_2').style['mix-blend-mode'] = 'normal';
+        var layer_River_2 = new L.geoJson(json_River_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_River_2',
+            layerName: 'layer_River_2',
+            pane: 'pane_River_2',
+            onEachFeature: pop_River_2,
+            style: style_River_2_0,
+        });
+        bounds_group.addLayer(layer_River_2);
+        map.addLayer(layer_River_2);
+        function pop_Sand_Deposition_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Area</th>\
+                        <td>' + (feature.properties['Area'] !== null ? Autolinker.link(feature.properties['Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Layer</th>\
+                        <td>' + (feature.properties['Layer'] !== null ? Autolinker.link(feature.properties['Layer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sand_Deposition_3_0() {
+            return {
+                pane: 'pane_Sand_Deposition_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,182,54,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Sand_Deposition_3');
+        map.getPane('pane_Sand_Deposition_3').style.zIndex = 403;
+        map.getPane('pane_Sand_Deposition_3').style['mix-blend-mode'] = 'normal';
+        var layer_Sand_Deposition_3 = new L.geoJson(json_Sand_Deposition_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Sand_Deposition_3',
+            layerName: 'layer_Sand_Deposition_3',
+            pane: 'pane_Sand_Deposition_3',
+            onEachFeature: pop_Sand_Deposition_3,
+            style: style_Sand_Deposition_3_0,
+        });
+        bounds_group.addLayer(layer_Sand_Deposition_3);
+        map.addLayer(layer_Sand_Deposition_3);
+        function pop_Existing_pond_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">LAYER</th>\
+                        <td>' + (feature.properties['LAYER'] !== null ? Autolinker.link(feature.properties['LAYER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LOCATION</th>\
+                        <td>' + (feature.properties['LOCATION'] !== null ? Autolinker.link(feature.properties['LOCATION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Area</th>\
+                        <td>' + (feature.properties['Area'] !== null ? Autolinker.link(feature.properties['Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Existing_pond_4_0() {
+            return {
+                pane: 'pane_Existing_pond_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,7,145,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Existing_pond_4');
+        map.getPane('pane_Existing_pond_4').style.zIndex = 404;
+        map.getPane('pane_Existing_pond_4').style['mix-blend-mode'] = 'normal';
+        var layer_Existing_pond_4 = new L.geoJson(json_Existing_pond_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Existing_pond_4',
+            layerName: 'layer_Existing_pond_4',
+            pane: 'pane_Existing_pond_4',
+            onEachFeature: pop_Existing_pond_4,
+            style: style_Existing_pond_4_0,
+        });
+        bounds_group.addLayer(layer_Existing_pond_4);
+        map.addLayer(layer_Existing_pond_4);
+        function pop_Vulnarable_Village_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">LAYER</th>\
+                        <td>' + (feature.properties['LAYER'] !== null ? Autolinker.link(feature.properties['LAYER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LABEL_POS'] !== null ? Autolinker.link(feature.properties['LABEL_POS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LOCATION</th>\
+                        <td>' + (feature.properties['LOCATION'] !== null ? Autolinker.link(feature.properties['LOCATION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Vulnarable_Village_5_0() {
+            return {
+                pane: 'pane_Vulnarable_Village_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,182,111,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Vulnarable_Village_5');
+        map.getPane('pane_Vulnarable_Village_5').style.zIndex = 405;
+        map.getPane('pane_Vulnarable_Village_5').style['mix-blend-mode'] = 'normal';
+        var layer_Vulnarable_Village_5 = new L.geoJson(json_Vulnarable_Village_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Vulnarable_Village_5',
+            layerName: 'layer_Vulnarable_Village_5',
+            pane: 'pane_Vulnarable_Village_5',
+            onEachFeature: pop_Vulnarable_Village_5,
+            style: style_Vulnarable_Village_5_0,
+        });
+        bounds_group.addLayer(layer_Vulnarable_Village_5);
+        map.addLayer(layer_Vulnarable_Village_5);
+        function pop_Ending_Point_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">S_No_</th>\
+                        <td>' + (feature.properties['S_No_'] !== null ? Autolinker.link(feature.properties['S_No_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Latitude</strong><br />' + (feature.properties['Latitude'] !== null ? Autolinker.link(feature.properties['Latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude</th>\
+                        <td>' + (feature.properties['Longitude'] !== null ? Autolinker.link(feature.properties['Longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Ending_Point_6_0() {
+            return {
+                pane: 'pane_Ending_Point_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(3,127,5,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Ending_Point_6');
+        map.getPane('pane_Ending_Point_6').style.zIndex = 406;
+        map.getPane('pane_Ending_Point_6').style['mix-blend-mode'] = 'normal';
+        var layer_Ending_Point_6 = new L.geoJson(json_Ending_Point_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Ending_Point_6',
+            layerName: 'layer_Ending_Point_6',
+            pane: 'pane_Ending_Point_6',
+            onEachFeature: pop_Ending_Point_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Ending_Point_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Ending_Point_6);
+        map.addLayer(layer_Ending_Point_6);
+        function pop_Starting_Point_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">S_No_</th>\
+                        <td>' + (feature.properties['S_No_'] !== null ? Autolinker.link(feature.properties['S_No_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude</th>\
+                        <td>' + (feature.properties['Latitude'] !== null ? Autolinker.link(feature.properties['Latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude</th>\
+                        <td>' + (feature.properties['Longitude'] !== null ? Autolinker.link(feature.properties['Longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Starting_Point_7_0() {
+            return {
+                pane: 'pane_Starting_Point_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(127,9,3,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Starting_Point_7');
+        map.getPane('pane_Starting_Point_7').style.zIndex = 407;
+        map.getPane('pane_Starting_Point_7').style['mix-blend-mode'] = 'normal';
+        var layer_Starting_Point_7 = new L.geoJson(json_Starting_Point_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Starting_Point_7',
+            layerName: 'layer_Starting_Point_7',
+            pane: 'pane_Starting_Point_7',
+            onEachFeature: pop_Starting_Point_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Starting_Point_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Starting_Point_7);
+        map.addLayer(layer_Starting_Point_7);
+        function pop_Existing_Stream_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Length</th>\
+                        <td>' + (feature.properties['Length'] !== null ? Autolinker.link(feature.properties['Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LOCATION</th>\
+                        <td>' + (feature.properties['LOCATION'] !== null ? Autolinker.link(feature.properties['LOCATION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Layer</th>\
+                        <td>' + (feature.properties['Layer'] !== null ? Autolinker.link(feature.properties['Layer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Existing_Stream_8_0() {
+            return {
+                pane: 'pane_Existing_Stream_8',
+                opacity: 1,
+                color: 'rgba(121,104,236,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Existing_Stream_8');
+        map.getPane('pane_Existing_Stream_8').style.zIndex = 408;
+        map.getPane('pane_Existing_Stream_8').style['mix-blend-mode'] = 'normal';
+        var layer_Existing_Stream_8 = new L.geoJson(json_Existing_Stream_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Existing_Stream_8',
+            layerName: 'layer_Existing_Stream_8',
+            pane: 'pane_Existing_Stream_8',
+            onEachFeature: pop_Existing_Stream_8,
+            style: style_Existing_Stream_8_0,
+        });
+        bounds_group.addLayer(layer_Existing_Stream_8);
+        map.addLayer(layer_Existing_Stream_8);
+        function pop_Stream_Link_Required_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Length</th>\
+                        <td>' + (feature.properties['Length'] !== null ? Autolinker.link(feature.properties['Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LOCATION</th>\
+                        <td>' + (feature.properties['LOCATION'] !== null ? Autolinker.link(feature.properties['LOCATION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Layer</th>\
+                        <td>' + (feature.properties['Layer'] !== null ? Autolinker.link(feature.properties['Layer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Stream_Link_Required_9_0() {
+            return {
+                pane: 'pane_Stream_Link_Required_9',
+                opacity: 1,
+                color: 'rgba(246,161,245,1.0)',
+                dashArray: '10,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Stream_Link_Required_9');
+        map.getPane('pane_Stream_Link_Required_9').style.zIndex = 409;
+        map.getPane('pane_Stream_Link_Required_9').style['mix-blend-mode'] = 'normal';
+        var layer_Stream_Link_Required_9 = new L.geoJson(json_Stream_Link_Required_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Stream_Link_Required_9',
+            layerName: 'layer_Stream_Link_Required_9',
+            pane: 'pane_Stream_Link_Required_9',
+            onEachFeature: pop_Stream_Link_Required_9,
+            style: style_Stream_Link_Required_9_0,
+        });
+        bounds_group.addLayer(layer_Stream_Link_Required_9);
+        map.addLayer(layer_Stream_Link_Required_9);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Stream_Link_Required_9.png" /> Stream_Link_Required': layer_Stream_Link_Required_9,'<img src="legend/Existing_Stream_8.png" /> Existing_Stream': layer_Existing_Stream_8,'<img src="legend/Starting_Point_7.png" /> Starting_Point': layer_Starting_Point_7,'<img src="legend/Ending_Point_6.png" /> Ending_Point': layer_Ending_Point_6,'<img src="legend/Vulnarable_Village_5.png" /> Vulnarable_Village': layer_Vulnarable_Village_5,'<img src="legend/Existing_pond_4.png" /> Existing_pond': layer_Existing_pond_4,'<img src="legend/Sand_Deposition_3.png" /> Sand_Deposition': layer_Sand_Deposition_3,'<img src="legend/River_2.png" /> River': layer_River_2,'Vellar_Vulnarable<br /><table><tr><td style="text-align: center;"><img src="legend/Vellar_Vulnarable_1_1VeryLow0.png" /></td><td>1 Very Low</td></tr><tr><td style="text-align: center;"><img src="legend/Vellar_Vulnarable_1_2Low1.png" /></td><td>2 Low</td></tr><tr><td style="text-align: center;"><img src="legend/Vellar_Vulnarable_1_3Moderate2.png" /></td><td>3 Moderate</td></tr><tr><td style="text-align: center;"><img src="legend/Vellar_Vulnarable_1_4High3.png" /></td><td>4 High</td></tr><tr><td style="text-align: center;"><img src="legend/Vellar_Vulnarable_1_5VeryHigh4.png" /></td><td>5 Very High</td></tr></table>': layer_Vellar_Vulnarable_1,"Google_Hybrid": layer_Google_Hybrid_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
